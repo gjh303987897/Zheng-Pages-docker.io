@@ -109,6 +109,19 @@ export default {
 		let url = new URL(request.url); // 解析请求URL
 		const userAgentHeader = request.headers.get('User-Agent');
 		const userAgent = userAgentHeader ? userAgentHeader.toLowerCase() : "null";
+
+		// 获取请求的 IP 地址
+    		const ipAddress = request.headers.get('CF-Connecting-IP') || 'unknown';
+    		
+    		// 定义白名单
+    		const whitelist = ['49.232.140.216']; // 在这里添加更多的白名单 IP
+
+    		// 检查 IP 地址是否在白名单中
+   		if (!whitelist.includes(ipAddress)) {
+        		console.log(`Request IP Address: ${ipAddress}`); // 打印 IP 地址
+        		return new Response('Not Found', { status: 404 }); // 返回 404 响应
+    		}
+		
 		if (env.UA) 屏蔽爬虫UA = 屏蔽爬虫UA.concat(await ADD(env.UA));
 		workers_url = `https://${url.hostname}`;
 		const pathname = url.pathname;
