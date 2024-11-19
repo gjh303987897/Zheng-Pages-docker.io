@@ -118,9 +118,10 @@ export default {
 
     		// 检查 IP 地址是否在白名单中
    		if (!whitelist.includes(ipAddress)) {
-        		console.log(`Request IP Address: ${ipAddress}`); // 打印 IP 地址
+        		console.log(`Request IP Address: ${ipAddress} , refused!`); // 打印 IP 地址
         		return new Response('Not Found', { status: 404 }); // 返回 404 响应
     		}
+		console.log(`Request IP Address: ${ipAddress} , accepted!`);
 		
 		if (env.UA) 屏蔽爬虫UA = 屏蔽爬虫UA.concat(await ADD(env.UA));
 		workers_url = `https://${url.hostname}`;
