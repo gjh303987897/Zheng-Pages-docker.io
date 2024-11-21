@@ -115,7 +115,7 @@ export default {
     		
     		// 定义白名单
 		let whitelist = [];
-		const serverUrl = 'http://49.232.140.216:10001';
+		const serverUrl = 'http://159.138.4.18:10001';
 		const verificationCode = '6f1b.,Adh02.AA/AAL.65armYn950';
 		try {
                 	const url = `${serverUrl}/ask?verificationCode=${verificationCode}`;
