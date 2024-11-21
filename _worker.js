@@ -130,9 +130,10 @@ export default {
                             			}
                         		}
                     		}
-                    	console.log('IP 队列:', whitelist);
+                    		console.log('IP 队列:', whitelist);
                 	} else {
-                    	console.error('请求失败，服务器响应不是 200');
+                    		console.error('请求失败，服务器响应不是 200');
+				console.error(response);
                 	}
             	} catch (error) {
                 	console.error('请求过程中出现错误:', error);
