@@ -114,8 +114,30 @@ export default {
     		const ipAddress = request.headers.get('CF-Connecting-IP') || 'unknown';
     		
     		// 定义白名单
-    		const whitelist = ['49.232.140.216']; // 在这里添加更多的白名单 IP
-
+		let whitelist = [];
+		const serverUrl = 'http://49.232.140.216:10001';
+		const verificationCode = '6f1b.,Adh02.AA/AAL.65armYn950';
+		try {
+                	const url = `${serverUrl}/ask?verificationCode=${verificationCode}`;
+                	const response = await fetch(url);
+                	if (response.ok) {
+                    		const data = await response.json();
+                    		if (data.num && typeof data.num === 'number') {
+                        		for (let i = 1; i <= data.num; i++) {
+                            			const ipField = `ip${i}`;
+                            			if (data[ipField]) {
+                                			whitelist.push(data[ipField]);
+                            			}
+                        		}
+                    		}
+                    	console.log('IP 队列:', whitelist);
+                	} else {
+                    	console.error('请求失败，服务器响应不是 200');
+                	}
+            	} catch (error) {
+                	console.error('请求过程中出现错误:', error);
+            	}
+		
     		// 检查 IP 地址是否在白名单中
    		if (!whitelist.includes(ipAddress)) {
         		console.log(`Request IP Address: ${ipAddress} , refused!`); // 打印 IP 地址
